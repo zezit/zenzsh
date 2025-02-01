@@ -1,0 +1,5 @@
+inquirer==3.4.0
+cliff==4.8.0
+PyInquirer==1.0.3
+prompt_toolkit==1.0.14
+click==8.1.8
