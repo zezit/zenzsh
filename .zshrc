@@ -57,8 +57,8 @@ bindkey '^l' clear-screen  # Clear screen with Ctrl+L
 bindkey '^H' show-aliases-and-binds  # Show all aliases and keybindings with Ctrl+H
 bindkey '^Bh' show-keybindings  # Show keybindings with Ctrl+B followed by h
 bindkey '^Ah' show-aliases  # Show aliases with Ctrl+A followed by h
-bindkey "^[[1;3D" backward-word # Move backward a word with Ctrl + Left
-bindkey "^[[1;3C" forward-word # Move forward a word with Ctrl + Right
+bindkey '^[[1;5D' vi-backward-word # Move backward a word with Ctrl + Left
+bindkey '^[[1;5C' vi-forward-word # Move forward a word with Ctrl + Right
 bindkey "^[[3;5~" kill-word # Delete the next word with Ctrl + Delete
 
 # History
@@ -92,12 +92,19 @@ alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 alias ls='exa --icons --color=auto'  # Enhanced ls
-alias cat='batcat'                      # Enhanced cat
 alias vim='nvim'
 alias vi='nvim'
 alias c='clear'
 alias grep='rg'                      # Enhanced grep
 alias fd='fdfind'                    # Enhanced find
+
+# Installs
+alias code.='code .'
+alias cat='batcat'
+
+# Utils
+alias copy='xclip -selection clipboard'
+alias paste='xclip -selection clipboard -o'
 
 # Git aliases
 alias gst='git status'
@@ -148,10 +155,22 @@ update_all() {
 }
 alias update='update_all'
 
+# ======================
 # Path
+# ======================
 export PATH="$HOME/.local/bin:$PATH"
 
+# ====== NVM variables ====== #
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# ====== System variables ====== #
+export DISPLAY=:0.0
+
+# ======================
 # Shell integrations
+# ======================
+source ~/.fzf-git.sh
 eval "$(fzf --zsh)"
 eval "$(zoxide init zsh)"
 eval "$(gh completion -s zsh)"  # GitHub CLI completion
